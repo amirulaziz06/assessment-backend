@@ -39,12 +39,34 @@
                 </tbody>
             </table>
         {{-- </div> --}}
+        <div class="row">
+            <div class="col-md-8">
+                {{ $users->appends(request()->query())->links('vendor.pagination.bootstrap-4') }}
+            </div>
+            <div class="col-md-4 text-right">
+                <?php $last_item = ($users->firstItem() + $users->count() - 1) ?>
+                @if($last_item == $users->firstItem())
+                <?php $page_range = $users->firstItem() ?>
+                @else
+                <?php $page_range = $users->firstItem() . " - " . $last_item ?>
+                @endif
+                {{-- {{ __('app.display_range_of_total_records', ['range' => $page_range, 'total' => $users->total()]) }} --}}
+            </div>
+        </div>
+
+        
     </div>
 </div>
-<a href="{{ url('/user/create') }}" class="btn btn-xs btn-info pull-right">add User</a>
-<form action="{{ url('/user/excel') }}" method="POST" enctype="multipart/form-data" class="d-flex">
-    @csrf
-    <input type="file" name="file">
-    <button onclick="return confirm('{{ __('are you sure?') }}')" type="submit" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-trash">submit</i></button>
-</form>
+<div>
+    <div>
+        <a href="{{ url('/user/create') }}" class="btn btn-xs btn-info pull-right">add User</a>
+    </div>
+    <div>
+        <form action="{{ url('/user/excel') }}" method="POST" enctype="multipart/form-data" class="d-flex">
+            @csrf
+            <input type="file" name="file">
+            <button onclick="return confirm('{{ __('are you sure?') }}')" type="submit" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-trash">submit</i></button>
+        </form>
+    </div>
+</div>
 @endsection

@@ -28,4 +28,12 @@ class UserStore extends FormRequest
             'email' => 'required|string|email|max:255|unique:users,email',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name' => strtolower(__('user')),
+            'email' => strtolower(__('email')),
+        ];
+    }
 }
