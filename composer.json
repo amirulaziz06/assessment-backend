@@ -14,7 +14,8 @@
         "laravel/passport": "7.5.1",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "~5.0",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "tucker-eric/eloquentfilter": "^2.4"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

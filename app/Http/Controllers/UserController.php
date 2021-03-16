@@ -19,11 +19,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $users = User::orderBy('created_at', 'DESC')->paginate(5);
-            return view('user.index', compact('users'));
+            // dd($request->all());
+            $users = User::filter($request->all())
+                ->orderBy('created_at', 'DESC')->paginate(5);
+                return view('user.index', compact('users'));
         } catch (Exception $exception) {
             // 
         }

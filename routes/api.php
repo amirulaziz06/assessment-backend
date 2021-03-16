@@ -20,3 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::group(['middleware' => 'auth:api', 'prefix' => '/v2', 'namespace' => 'Api\V2', 'as' => 'api.v2.'], function () {
     // Route::apiResource('/users', 'UserController');
 // });
+
+Route::post('register','Api\UserController@create');
+Route::get('/user', 'Api\UserController@getAll');
+Route::get('/user/{id}', 'Api\UserController@getById');
+Route::delete('/user/delete/{id}', 'Api\UserController@destroy');

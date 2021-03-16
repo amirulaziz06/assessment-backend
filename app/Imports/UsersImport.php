@@ -14,15 +14,7 @@ class UsersImport implements ToCollection
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    // public function model(collection $row)
-    // {
-    //     dd($row);
-    //     return new User([
-    //         'name'     => $row[0],
-    //         'email'    => $row[1], 
-    //         'password' => Hash::make($row[2]),
-    //      ]);
-    // }
+
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) 

@@ -1,6 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+@include('user._search')
+
+<div style="margin-left: 80%;">
+    <a href="{{ url('/user/create') }}" class="btn btn-xs btn-info pull-right">add User</a>
+</div>
+<div style="margin: -10px 30%">
+    <div><h2> {{ __('Add User Excel') }} </h2></div>
+        <div>
+            <form action="{{ url('/user/excel') }}" method="POST" enctype="multipart/form-data" class="d-flex">
+                @csrf
+                <input type="file" name="file">
+                <button onclick="return confirm('{{ __('are you sure?') }}')" type="submit" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-trash">submit</i></button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="m-portlet m-portlet--mobile">
     <div class="m-portlet__body">
@@ -53,20 +69,6 @@
                 {{-- {{ __('app.display_range_of_total_records', ['range' => $page_range, 'total' => $users->total()]) }} --}}
             </div>
         </div>
-
-        
-    </div>
-</div>
-<div>
-    <div>
-        <a href="{{ url('/user/create') }}" class="btn btn-xs btn-info pull-right">add User</a>
-    </div>
-    <div>
-        <form action="{{ url('/user/excel') }}" method="POST" enctype="multipart/form-data" class="d-flex">
-            @csrf
-            <input type="file" name="file">
-            <button onclick="return confirm('{{ __('are you sure?') }}')" type="submit" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-trash">submit</i></button>
-        </form>
     </div>
 </div>
 @endsection
