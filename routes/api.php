@@ -25,3 +25,4 @@ Route::post('register','Api\UserController@create');
 Route::get('/user', 'Api\UserController@getAll');
 Route::get('/user/{id}', 'Api\UserController@getById');
 Route::delete('/user/delete/{id}', 'Api\UserController@destroy');
+Route::put('/user/update/{id}', 'Api\UserController@update');

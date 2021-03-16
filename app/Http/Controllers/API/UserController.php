@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\User;
 use App\Http\Requests\UserStore;
+use App\Http\Requests\UserUpdate;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(UserStore $request)
     {
         $validator = Validator::make($request->all(), [
             'name'              => 'required|string|max:255',
@@ -110,9 +111,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserStore $request)
+    public function store(Request $request)
     {
-        User::create($request);
+
     }
 
     /**
@@ -144,9 +145,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdate $request, $id)
     {
-        // 
+        try {
+            $userModel = User::findOrFail($id);
+            $userModel->name  = $request->name;
+            $userModel->email = $request->email;
+            $userModel->save();
+
+            return response()->json(['data'=> $userModel, 'http_code' => 200, 'message' => 'Success deleted user', 'status' => true]);
+        } catch (Exception $exception) {
+            return response()->json(['http_code' =>  400,'message'=> 'Internal server error','status'=> false], 400);
+        }
     }
 
     /**
