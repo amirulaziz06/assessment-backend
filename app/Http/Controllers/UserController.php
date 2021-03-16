@@ -8,7 +8,9 @@ use App\User;
 use App\Http\Requests\UserStore;
 use App\Http\Requests\UserUpdate;
 use Exception;
-
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -85,7 +87,7 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             return view('user.edit', compact('user'));
         } catch (Exception $exception) {
-            // 
+            return $exception;
         }
     }
 
@@ -105,7 +107,7 @@ class UserController extends Controller
             $userModel->save();
             return redirect()->route('user.index');
         } catch (Exception $exception) {
-            dd('error');
+            return $exception;
         }
     }
 
@@ -122,7 +124,17 @@ class UserController extends Controller
             $userModel->delete();
             return redirect()->route('user.index');
         } catch (Exception $exception) {
-            dd('Error');
+            return $exception;
+        }
+    }
+
+    public function import(Request $request) 
+    {
+        try {
+            $model = Excel::import(new UsersImport, request()->file('file'));
+            return redirect()->route('user.index');
+        } catch (Exception $exception) {
+            return $exception;
         }
     }
 }

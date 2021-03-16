@@ -32,15 +32,19 @@
                                     <input name="_method" type="hidden" value="DELETE">
                                     <button onclick="return confirm('{{ __('are you sure?') }}')" type="submit" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-trash">Delete</i></button>
                                 </form>
-
-
                                 </div>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+        {{-- </div> --}}
     </div>
 </div>
 <a href="{{ url('/user/create') }}" class="btn btn-xs btn-info pull-right">add User</a>
+<form action="{{ url('/user/excel') }}" method="POST" enctype="multipart/form-data" class="d-flex">
+    @csrf
+    <input type="file" name="file">
+    <button onclick="return confirm('{{ __('are you sure?') }}')" type="submit" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-trash">submit</i></button>
+</form>
 @endsection

@@ -25,3 +25,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::delete('/user/delete/{id}', 'UserController@delete')->name('user.destroy');
 
 Route::resource('/user', 'UserController');
+
+Route::post('/user/excel', 'UserController@import')->name('user.import');
